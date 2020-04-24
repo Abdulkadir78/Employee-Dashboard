@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1 class="text-center my-4">Add Employee</h1>
+    <form action="/newEmployee" method="POST">
+        <div class="form-group">
+            <label class="h5">Name</label>
+            <input type="text" name="Name" class="form-control mb-4" required>
+        </div>
+        <div class="form-group">
+            <label class="h5">Email</label>
+            <input type="email" name="Email" class="form-control mb-4" required>
+        </div>
+        <div class="form-group">
+            <label class="h5">Post</label>
+            <input type="text" name="Post" class="form-control mb-4" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary mt-4">Add employee</button>
+    </form>
+    <div class="mt-4 ml-2">
+        <a href="/">Go Back</a> 
+    </div>
+{% endblock %}

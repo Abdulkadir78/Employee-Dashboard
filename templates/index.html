@@ -1,0 +1,73 @@
+{% extends 'base.html' %} 
+
+{% block body %} 
+
+<div class="row">
+  <div class="col">
+    <div class="jumbotron mt-5 p-3">
+      <h2>
+        Employee Dashboard
+        <a href="/newEmployee" class="btn btn-success mt-1 float-right">
+          Add Employee
+        </a>
+      </h2>
+    </div>
+  </div>
+</div>
+
+{% if employees|length == 0 %}
+
+{% with messages = get_flashed_messages(with_categories = True) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissable">{{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<h4 class="text-center mt-3 font-italic">There are no records.</h4>
+
+{% else %}
+
+{% with messages = get_flashed_messages(with_categories = True) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissable">{{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<table class="table table-bordered table-hover">
+  <thead class="h4">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Post</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody class="h5">
+    {% for employee in employees %}
+    <tr>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.email }}</td>
+      <td>{{ employee.post }}</td>
+      <td>
+        <a href="/edit/{{ employee.id }}" class="btn btn-outline-info mb-2">Edit</a>
+        <a href="/delete/{{ employee.id }}" class="btn btn-outline-danger mb-2">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% endblock %}
